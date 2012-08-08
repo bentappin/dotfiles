@@ -1,3 +1,10 @@
+" This must be first, because it changes other options as side effect
+set nocompatible
+
+" Hide buffers instead of closing - allows unwritten changes to files so you
+" can open new ones
+set hidden
+
 set encoding=utf-8
 
 " Detect type of file
@@ -25,6 +32,9 @@ set hlsearch
 " Use case insensitive search, except when using capital letters
 set ignorecase
 set smartcase
+
+" Show search matches as you type
+set incsearch
 
 " Enable use of the mouse for all modes
 set mouse=a
