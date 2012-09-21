@@ -43,14 +43,12 @@ alias ls="ls -Gp"
 . ~/.scripts/z.sh
 . ~/.scripts/git-completion.bash
 
-
 # Setup command prompt
-# Setup command prompt
-hostcolour=$(hostname | od | tr ' ' '\n' | awk '{total = total + $1}END{print 32 + (total % 4)}')
 if [ "$TERM" != 'dumb' ] && [ -n "$BASH" ] && [ -n "$PS1" ]; then
-    if [ `/usr/bin/whoami` = 'root' ]; then
-        export PS1='\[\e[01;34m\][\@] \[\e[01;31m\]\h \[\e[01;34m\]\w \n\$ \[\e[00m\]'
+    if [[ `/usr/bin/whoami` = 'root' || `/usr/bin/whoami` = 'admin' ]]; then
+        hostcolour='31' # Red.
     else
-        export PS1='\e[01;36m[\@] \e[01;${hostcolour}m\u@\h \e[01;36m\w\e[00m$(__git_ps1)\n\$ \e[00m'
+        hostcolour=$(hostname | od | tr ' ' '\n' | awk '{total = total + $1}END{print 32 + (total % 4)}')
     fi
+    export PS1='\[\e[1;36m\][\@] \[\e[01;${hostcolour}m\]\u@\h\[\e[1;36m\] \w \n$\[\e[0m\] '
 fi
