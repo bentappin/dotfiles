@@ -1,5 +1,5 @@
-# Set usr/local bin folders ahead of others
-PATH=/usr/local/sbin:/usr/local/bin:$PATH
+# Setup $PATH.
+export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
 
 # Tell ls to be colourful
 export CLICOLOR=1
@@ -13,12 +13,16 @@ alias v=vagrant
 alias ls="ls -Gp"
 
 # Source some scripts
-. ~/.scripts/z.sh
-. ~/.scripts/git-completion.bash
+function source_script {
+    if [ -f $1 ];
+    then
+       source $1
+    fi
+}
 
-# Setup command prompt
-# Set usr/local bin folders ahead of others
-PATH=/usr/local/sbin:/usr/local/bin:$PATH
+source_script ~/.scripts/z.sh
+source_script ~/.scripts/git-completion.bash
+source_script /usr/local/share/python/virtualenvwrapper.sh
 
 # Shell functions
 ord() {
@@ -38,10 +42,6 @@ export GREP_OPTIONS='--color=auto'
 alias g=git
 alias v=vagrant
 alias ls="ls -Gp"
-
-# Source some scripts
-. ~/.scripts/z.sh
-. ~/.scripts/git-completion.bash
 
 # Setup command prompt
 if [ "$TERM" != 'dumb' ] && [ -n "$BASH" ] && [ -n "$PS1" ]; then
