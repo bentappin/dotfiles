@@ -1,0 +1,28 @@
+[user]
+  name = Ben Tappin
+  email = ben@mrben.co.uk
+
+[color]
+  ui = true
+
+[alias]
+  s = status
+  stat = status
+  st = status --short --branch
+  ci = commit
+  cm = commit -m
+  ca = commit -a -m
+  co = checkout
+  br = branch
+  ls = log --relative --abbrev-commit --pretty=format:'%C(white)%h %C(cyan)%cr %C(green)by %cn %Creset%s' -20
+  lg = log --relative --abbrev-commit --date=local --pretty=format:'%C(white)%h %C(cyan)%cr %C(green)by %cn %Creset%n%C(yellow)%cd%n%s' --stat -5
+  df = diff --cached
+  di = diff
+  dl = log -p --relative
+  dw = diff --color-words
+  d = diff -b -w --color-words
+  inf = remote show origin
+  tg = tag -n1
+
+[push]
+  default = matching
