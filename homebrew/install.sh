@@ -18,6 +18,9 @@ brew install wget libjpeg gfortran swig git ffmpeg
 brew tap phinze/homebrew-cask
 brew install brew-cask
 
+# Install apps to /Applications
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
 # Install native apps
 brew cask install alfred
 brew cask install dropbox

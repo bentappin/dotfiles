@@ -101,7 +101,7 @@ install_dotfiles
 # If we are on a mac, lets install and setup homebrew
 if [ "$1" == "install" ] && [ "$(uname -s)" == "Darwin" ]
 then
-  info "installing all the things"
+  info "installing all the things\n"
   if . bin/dot > /tmp/dotfiles-dot 2>&1
   then
     success "installed all the things"
