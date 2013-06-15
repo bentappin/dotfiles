@@ -17,6 +17,13 @@ cd ~/.dotfiles
 This will symlink the appropriate files in `.dotfiles` to your home directory.
 Everything is configured and tweaked within `~/.dotfiles`.
 
+If you also want to install apps and run `bin/dot` include the command line
+argument `install` when running `bootstrap.sh`:
+
+```sh
+./bootstrap.sh install
+```
+
 The main file you'll want to change right off the bat is `bash/bashrc.symlink`,
 which sets up a few paths that'll be different on your particular machine.
 
