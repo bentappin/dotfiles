@@ -1,0 +1,26 @@
+# shortcut to this dotfiles path is $DOTFILES_HOME
+export DOTFILES_HOME=$HOME/.dotfiles/
+
+# use .localrc for SUPER SECRET CRAP that you don't
+# want in your public, versioned repo.
+if [[ -a ~/.localrc ]]
+then
+  source ~/.localrc
+fi
+
+# load the path files
+for file in `find $DOTFILES_HOME -iname "path.bash"`
+do
+  source $file
+done
+
+# load everything but the path and completion files
+for file in `find $DOTFILES_HOME -iname "*.bash" ! -iname "path.bash" ! -iname "completion.bash"`
+do
+  source $file
+done
+
+for file in `find $DOTFILES_HOME -iname "completion.bash"`
+do
+  source $file
+done

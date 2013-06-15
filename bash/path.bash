@@ -1,0 +1,1 @@
+export PATH=/usr/local/share/python:/usr/local/sbin:/usr/local/bin:$PATH
