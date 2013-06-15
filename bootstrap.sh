@@ -99,16 +99,16 @@ install_dotfiles () {
 install_dotfiles
 
 # If we are on a mac, lets install and setup homebrew
-if [ "$(uname -s)" == "Darwin" ]
+if [ "$1" == "install" ] && [ "$(uname -s)" == "Darwin" ]
 then
-  info "installing dependencies"
+  info "installing all the things"
   if . bin/dot > /tmp/dotfiles-dot 2>&1
   then
-    success "dependencies installed"
+    success "installed all the things"
   else
-    fail "error installing dependencies"
+    fail "error installing all the things"
   fi
 fi
 
-echo ''
-echo '  All installed!'
+echo ""
+echo " All done!"
