@@ -11,5 +11,6 @@ $DOTFILES_HOME/osx/set-defaults.sh
 # Upgrade homebrew
 brew update
 
-# Install homebrew packages
+# Kick-off installs
 $DOTFILES_HOME/homebrew/install.sh 2>&1
+$DOTFILES_HOME/python/install.sh 2>&1

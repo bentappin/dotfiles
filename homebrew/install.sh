@@ -11,7 +11,6 @@ then
 fi
 
 # Install homebrew packages
-brew install python --framework
 brew install wget libjpeg gfortran swig git ffmpeg
 
 # Install brew-cask for binary installs
