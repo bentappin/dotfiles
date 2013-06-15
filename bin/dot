@@ -9,7 +9,10 @@
 $DOTFILES_HOME/osx/set-defaults.sh
 
 # Upgrade homebrew
-brew update
+if [ `which brew` ];
+then
+  brew update
+fi
 
 # Kick-off installs
 $DOTFILES_HOME/homebrew/install.sh 2>&1
