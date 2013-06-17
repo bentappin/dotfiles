@@ -1,5 +1,5 @@
 brew install npm
 
-npm instal -g less
+npm install -g less
 
 exit 0
