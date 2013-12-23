@@ -25,6 +25,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Install native apps
 brew cask install alfred
+brew cask install colors
 brew cask install dropbox
 brew cask install firefox
 brew cask install f-lux
