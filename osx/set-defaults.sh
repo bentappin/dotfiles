@@ -28,8 +28,21 @@
 # General UI/UX                                                               #
 ###############################################################################
 
+# Set computer name (as done via System Preferences → Sharing)
+sudo scutil --set ComputerName "apfel"
+sudo scutil --set HostName "apfel"
+sudo scutil --set LocalHostName "apfel"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "apfel"
+
+# Disable the sound effects on boot
+sudo nvram SystemAudioVolume=" "
+
 # Set sidebar icon size to medium
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
+
+# Always show scrollbars
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+# Possible values: `WhenScrolling`, `Automatic` and `Always`
 
 # Disable opening and closing window animations
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
@@ -58,11 +71,18 @@ defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
+# Reveal IP address, hostname, OS version, etc. when clicking the clock
+# in the login window
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+
+# Restart automatically if the computer freezes
+systemsetup -setrestartfreeze on
+
 # Disable Notification Center and remove the menu bar icon
-if launchctl list | grep -v grep | grep com.apple.notificationcenterui.agent > /dev/null;
-	then
-	launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
-fi
+launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+
+# Disable smart quotes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
@@ -90,12 +110,6 @@ defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-
-# Enable access for assistive devices
-echo -n 'a' | sudo tee /private/var/db/.AccessibilityAPIEnabled > /dev/null 2>&1
-sudo chmod 444 /private/var/db/.AccessibilityAPIEnabled
-# TODO: avoid GUI password prompt somehow (http://apple.stackexchange.com/q/60476/4408)
-#sudo osascript -e 'tell application "System Events" to set UI elements enabled to true'
 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
 defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
@@ -223,6 +237,13 @@ sudo nvram boot-args="mbasd=1"
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
+# Expand the following File Info panes:
+# “General”, “Open with”, and “Sharing & Permissions”
+defaults write com.apple.finder FXInfoPanesExpanded -dict \
+	General -bool true \
+	OpenWith -bool true \
+	Privileges -bool true
+
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #
 ###############################################################################
@@ -232,6 +253,9 @@ defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
 # Set the icon size of Dock items to 48 pixels
 defaults write com.apple.dock tilesize -int 48
+
+# Minimize windows into their application’s icon
+defaults write com.apple.dock minimize-to-application -bool true
 
 # Enable spring loading for all Dock items
 defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
@@ -273,7 +297,7 @@ defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock showhidden -bool true
 
 # Reset Launchpad
-find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
+find ~/Library/Application\ Support/Dock -name "*.db" ! -name "desktoppicture.db" -maxdepth 1 -delete
 
 # Hot corners
 # Possible values:
@@ -310,6 +334,9 @@ defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 # Hide Safari’s bookmarks bar by default
 defaults write com.apple.Safari ShowFavoritesBar -bool false
 
+# Hide Safari’s sidebar in Top Sites
+defaults write com.apple.Safari ShowSidebarInTopSites -bool false
+
 # Disable Safari’s thumbnail cache for History and Top Sites
 defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 
@@ -344,9 +371,64 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 # Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app
 defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\\U21a9"
 
+# Display emails in threaded mode, sorted by date (oldest at the top)
+defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
+defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "yes"
+defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date"
+
 ###############################################################################
 # Disk Utility                                                                #
 ###############################################################################
+
+# Enable the debug menu in Disk Utility
+defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
+defaults write com.apple.DiskUtility advanced-image-options -bool true
+
+###############################################################################
+# Time Machine                                                                #
+###############################################################################
+
+# Prevent Time Machine from prompting to use new hard drives as backup volume
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Disable local Time Machine backups
+hash tmutil &> /dev/null && sudo tmutil disablelocal
+
+###############################################################################
+# Activity Monitor                                                            #
+###############################################################################
+
+# Show the main window when launching Activity Monitor
+defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
+
+# Visualize CPU usage in the Activity Monitor Dock icon
+defaults write com.apple.ActivityMonitor IconType -int 5
+
+# Show all processes in Activity Monitor
+defaults write com.apple.ActivityMonitor ShowCategory -int 0
+
+# Sort Activity Monitor results by CPU usage
+defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+###############################################################################
+# Address Book, Dashboard, iCal, TextEdit, and Disk Utility                   #
+###############################################################################
+
+# Enable the debug menu in Address Book
+defaults write com.apple.addressbook ABShowDebugMenu -bool true
+
+# Enable Dashboard dev mode (allows keeping widgets on the desktop)
+defaults write com.apple.dashboard devmode -bool true
+
+# Enable the debug menu in iCal (pre-10.8)
+defaults write com.apple.iCal IncludeDebugMenu -bool true
+
+# Use plain text mode for new TextEdit documents
+defaults write com.apple.TextEdit RichText -int 0
+# Open and save files as UTF-8 in TextEdit
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
 # Enable the debug menu in Disk Utility
 defaults write com.apple.DiskUtility DUDebugMenuEnabled -bool true
@@ -361,6 +443,13 @@ defaults write com.apple.appstore WebKitDeveloperExtras -bool true
 
 # Enable Debug Menu in the Mac App Store
 defaults write com.apple.appstore ShowDebugMenu -bool true
+
+###############################################################################
+# Messages                                                                    #
+###############################################################################
+
+# Disable smart quotes as it’s annoying for messages that contain code
+defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
 
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
@@ -393,8 +482,9 @@ defaults write org.m0k.transmission WarningLegal -bool false
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Dashboard" "Dock" "Finder" "Mail" "Safari" "SystemUIServer" \
-		"Terminal" "Transmission"; do
-	killall "$app" > /dev/null 2>&1
+for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "Dock" \
+	"Finder" "Mail" "Messages" "Safari" "SizeUp" "SystemUIServer" "Terminal" \
+	"Transmission" "Twitter" "iCal"; do
+	killall "${app}" > /dev/null 2>&1
 done
 exit 0
