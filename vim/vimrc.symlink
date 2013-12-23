@@ -2,6 +2,7 @@
 set nocompatible
 
 " Set colour scheme
+set t_Co=256
 colorscheme ir_black
 
 " Hide buffers instead of closing - allows unwritten changes to files so you
