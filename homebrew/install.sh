@@ -38,7 +38,19 @@ brew cask install sublime-text
 brew cask install textual
 brew cask install transmission
 brew cask install truecrypt
+brew cask install vagrant
 brew cask install virtualbox
 brew cask install vlc
+
+# Download the precise vagrant box in advance if user wishes.
+echo "Do you want to add the precise vagrant box now? (It could take 30 minutes.) [y/N]:"
+read -t 10 add_precise
+
+if [ "$add_precise" == "y" ] || [ "$add_precise" == "Y" ]; then
+  echo "Adding precise32 vagrant box..."
+  vagrant box add precise32 http://files.vagrantup.com/precise32.box
+else
+  echo "Skipping..."
+fi
 
 exit 0
