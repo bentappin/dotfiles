@@ -1,4 +1,4 @@
-brew install python --framework
+brew install python
 pip install virtualenv virtualenvwrapper
 
 exit 0
