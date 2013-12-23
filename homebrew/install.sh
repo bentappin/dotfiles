@@ -11,7 +11,10 @@ then
 fi
 
 # Install homebrew packages
-brew install wget libjpeg gfortran swig git ffmpeg
+# First install some libs that may or may not need to be installed before other things...
+brew install flac lame libjpeg swig freetype
+# Now install some "bigger" things...
+brew install ffmpeg gfortran git gnupg grc libsndfile lynx mercurial openssl postgresql rabbitmq wget
 
 # Install brew-cask for binary installs
 brew tap phinze/homebrew-cask
@@ -29,11 +32,12 @@ brew cask install google-chrome
 brew cask install handbrake
 brew cask install imageoptim
 brew cask install iterm2
-brew cask install one-password
+brew cask install limechat
+brew cask install onepassword
 brew cask install sublime-text
 brew cask install textual
 brew cask install transmission
-brew cask install true-crypt
+brew cask install truecrypt
 brew cask install virtualbox
 brew cask install vlc
 
