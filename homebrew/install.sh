@@ -35,7 +35,6 @@ brew cask install iterm2
 brew cask install limechat
 brew cask install onepassword
 brew cask install sublime-text
-brew cask install textual
 brew cask install transmission
 brew cask install truecrypt
 brew cask install vagrant
