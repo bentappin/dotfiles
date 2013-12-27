@@ -33,6 +33,7 @@ brew cask install google-chrome
 brew cask install handbrake
 brew cask install imageoptim
 brew cask install iterm2
+brew cask install lightpaper
 brew cask install limechat
 brew cask install onepassword
 brew cask install sublime-text
