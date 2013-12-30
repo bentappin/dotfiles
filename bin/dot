@@ -18,3 +18,4 @@ fi
 $DOTFILES_HOME/homebrew/install.sh 2>&1
 $DOTFILES_HOME/python/install.sh 2>&1
 $DOTFILES_HOME/npm/install.sh 2>&1
+$DOTFILES_HOME/rvm/install.sh 2>&1
