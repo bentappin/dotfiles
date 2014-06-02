@@ -25,4 +25,4 @@
   tg = tag -n1
 
 [push]
-  default = matching
+  default = upstream 

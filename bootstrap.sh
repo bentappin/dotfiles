@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DOTFILES_ROOT="`pwd`"
+export DOTFILES_HOME="`pwd`"
 
 set -e
 
@@ -29,6 +29,19 @@ link_files () {
   success "linked $1 to $2"
 }
 
+# If we are on a mac, lets install and setup homebrew
+if [ "$1" == "install" ] && [ "$(uname -s)" == "Darwin" ]
+then
+  info "installing all the things\n"
+  #if . bin/dot > /tmp/dotfiles-dot 2>&1
+  if . bin/dot
+  then
+    success "installed all the things"
+  else
+    fail "error installing all the things"
+  fi
+fi
+
 install_dotfiles () {
   info 'installing dotfiles'
 
@@ -36,7 +49,7 @@ install_dotfiles () {
   backup_all=false
   skip_all=false
 
-  for source in `find $DOTFILES_ROOT -maxdepth 2 -name \*.symlink`
+  for source in `find $DOTFILES_HOME -maxdepth 2 -name \*.symlink`
   do
     dest="$HOME/.`basename \"${source%.*}\"`"
 
@@ -96,19 +109,7 @@ install_dotfiles () {
   done
 }
 
-install_dotfiles
-
-# If we are on a mac, lets install and setup homebrew
-if [ "$1" == "install" ] && [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing all the things\n"
-  if . bin/dot > /tmp/dotfiles-dot 2>&1
-  then
-    success "installed all the things"
-  else
-    fail "error installing all the things"
-  fi
-fi
+#install_dotfiles
 
 echo ""
 echo " All done!"

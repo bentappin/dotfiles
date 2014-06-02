@@ -24,3 +24,9 @@ for file in `find $DOTFILES_HOME -iname "completion.bash"`
 do
   source $file
 done
+
+function ssh-copy-id(){
+  # Pass connection string as argument.
+  cat ~/.ssh/id_rsa.pub | ssh $1 "mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys"
+}
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
