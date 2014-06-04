@@ -14,7 +14,9 @@ fi
 # First install some libs that may or may not need to be installed before other things...
 brew install gcc flac lame libjpeg swig freetype
 # Now install some "bigger" things...
-brew install ffmpeg git gnupg grc libsndfile lynx mercurial openssl postgresql rabbitmq wget gettext
+brew install ffmpeg git gnupg grc libsndfile lynx mercurial openssl postgresql rabbitmq wget
+
+brew install gettext && brew link gettext --force
 
 # Install brew-cask for binary installs
 brew tap caskroom/cask
