@@ -36,6 +36,7 @@ brew cask install google-chrome
 brew cask install handbrake
 brew cask install imageoptim
 brew cask install iterm2-beta
+brew cask install launchrocket
 brew cask install lightpaper
 brew cask install limechat
 brew cask install onepassword
