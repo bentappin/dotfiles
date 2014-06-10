@@ -12,7 +12,7 @@ fi
 
 # Install homebrew packages
 # First install some libs that may or may not need to be installed before other things...
-brew install gcc flac lame libjpeg swig freetype
+brew install gcc flac lame libjpeg swig freetype watch
 # Now install some "bigger" things...
 brew install ffmpeg git gnupg grc libsndfile lynx mercurial openssl postgresql rabbitmq wget
 
