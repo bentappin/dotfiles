@@ -48,7 +48,7 @@ filetype plugin indent on    " required
 " Set colour scheme
 set t_Co=256
 set background=dark
-colorscheme gruvbox 
+colorscheme Tomorrow-Night-Eighties
 
 " Hide buffers instead of closing - allows unwritten changes to files so you
 " can open new ones
