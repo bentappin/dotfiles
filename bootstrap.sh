@@ -109,7 +109,7 @@ install_dotfiles () {
   done
 }
 
-#install_dotfiles
+install_dotfiles
 
 echo ""
 echo " All done!"
