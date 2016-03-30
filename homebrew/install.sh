@@ -26,15 +26,12 @@ brew install caskroom/cask/brew-cask
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Install native apps
-brew cask install alfred
-brew cask install dropbox
 brew cask install firefox
 brew cask install flux
 brew cask install google-chrome
-brew cask install iterm2
+brew cask install iterm2-beta
 brew cask install launchrocket
-brew cask install lightpaper
-brew cask install onepassword
+brew cask install 1password
 brew cask install skype
 brew cask install sublime-text-dev
 brew cask install transmission
