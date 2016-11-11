@@ -7,14 +7,43 @@
 # Check for Homebrew, install if not present
 if [ -z `which brew` ];
 then
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+# Disable brew analytics
+brew analytics off
+
 # Install homebrew packages
-# First install some libs that may or may not need to be installed before other things...
-brew install gcc flac lame libjpeg little-cms2 swig freetype watch wget
+# First install some libs and things that may or may not need to be installed before other things...
+brew install \
+gcc \
+pkg-config \
+flac \
+lame \
+libjpeg \
+little-cms2 \
+swig \
+freetype \
+watch \
+wget
+
 # Now install some "bigger" things...
-brew install ffmpeg git gnupg grc libsndfile lynx openssl postgresql redis rabbitmq mp3gain mp3info youtube-dl p7zip cdrtools
+brew install \
+ffmpeg \
+git \
+gnupg \
+grc \
+libsndfile \
+lynx \
+openssl \
+postgresql \
+redis \
+rabbitmq \
+mp3gain \
+mp3info \
+youtube-dl \
+p7zip \
+cdrtools
 
 brew install gettext && brew link gettext --force
 
@@ -26,19 +55,22 @@ brew tap caskroom/versions
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Install native apps
-brew cask install firefox
-brew cask install flux
-brew cask install google-chrome
-brew cask install iterm2-beta
-brew cask install launchrocket
-brew cask install 1password
-brew cask install skype
-brew cask install sublime-text-dev
-brew cask install transmission
-brew cask install vagrant
-brew cask install virtualbox
-brew cask install vlc
-brew cask install spectacle
-brew cask install handbrake
+brew cask install \
+1password \
+firefox \
+flux \
+google-chrome \
+handbrake \
+iterm2-beta \
+launchrocket \
+skype \
+slack \
+spectacle \
+spotify \
+sublime-text-dev \
+transmission \
+vagrant \
+virtualbox \
+vlc
 
 exit 0
