@@ -14,13 +14,13 @@ fi
 # First install some libs that may or may not need to be installed before other things...
 brew install gcc flac lame libjpeg little-cms2 swig freetype watch wget
 # Now install some "bigger" things...
-brew install ffmpeg git gnupg grc libsndfile lynx openssl postgresql rabbitmq mp3gain mp3info youtube-dl p7zip cdrtools
+brew install ffmpeg git gnupg grc libsndfile lynx openssl postgresql redis rabbitmq mp3gain mp3info youtube-dl p7zip cdrtools
 
 brew install gettext && brew link gettext --force
 
 # Install brew-cask for binary installs
+brew tap caskroom/cask
 brew tap caskroom/versions
-brew install caskroom/cask/brew-cask
 
 # Install apps to /Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -38,5 +38,7 @@ brew cask install transmission
 brew cask install vagrant
 brew cask install virtualbox
 brew cask install vlc
+brew cask install spectacle
+brew cask install handbrake
 
 exit 0

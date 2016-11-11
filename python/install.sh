@@ -1,6 +1,4 @@
-brew install pyenv
-brew install pyenv-virtualenv
-brew install pyenv-virtualenvwrapper
+brew install pyenv pyenv-virtualenv pyenv-virtualenvwrapper
 
 export PYENV_ROOT=/usr/local/var/pyenv
 eval "$(pyenv init -)"
