@@ -31,6 +31,7 @@ wget
 brew install \
 ffmpeg \
 git \
+mercurial \
 gnupg \
 grc \
 libsndfile \
