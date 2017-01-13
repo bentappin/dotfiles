@@ -51,9 +51,6 @@ brew install gettext && brew link gettext --force
 brew tap caskroom/cask
 brew tap caskroom/versions
 
-# Install apps to /Applications
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
 # Install native apps
 brew cask install \
 1password \
