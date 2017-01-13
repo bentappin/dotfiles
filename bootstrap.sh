@@ -113,3 +113,5 @@ install_dotfiles
 
 echo ""
 echo " All done!"
+
+exit 0
